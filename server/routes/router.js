@@ -18,10 +18,10 @@ const services = require('../services/render');
  */
  
 route.get('/', services.homeRoutes);
-route.get('/allfloods',auth, (req,res) =>{
-    axios.get('https://agile-hollows-34401.herokuapp.com/api/flood')
+route.get('/allfloods',(req,res) =>{
+    axios.get('https://guarded-meadow-18404.herokuapp.com/api/floods')
     .then(function(response){
-       // res.send(response);
+       console.log(response);
         res.render('index', { floods : response.data });
     })
     .catch(err =>{
@@ -32,7 +32,7 @@ route.get('/allfloods',auth, (req,res) =>{
 /**
  *  @description add flood
  *  @method GET /add-flood
- */
+ **/
 route.get('/add-flood', services.add_flood)
 route.get('/floodlist-weblink', services.add_weblink)
 route.get('/twitter', services.add_twit)
@@ -75,8 +75,6 @@ route.get('/api/flood', (req, res,next) => {
             })
       
     }
-
-
 });
 // route.put('/api/flood/:id', controller.update);
 route.delete('/api/flood/:id', (req, res ) => {

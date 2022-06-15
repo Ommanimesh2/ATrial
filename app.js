@@ -74,6 +74,9 @@ app.get('/login',async (req, res, next) => {
         res.status(500).send(e)
     }
 })
+app.get('/register',async(req,res)=>{
+    res.render("register");
+})
 app.get('/flooddata', async (req, res, next) => {
 
     try {

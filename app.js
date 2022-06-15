@@ -137,11 +137,7 @@ app.post('/register',async(req,res)=>{
                 password : req.body.password
             })
 
-            const token = await registeruser.generateAuthToken();
-            res.cookie("jwt",token, {
-                expires:new Date(Date.now() +(24*60*60*1000*2)),
-                httpOnly:true
-            });
+       
             const registered = await registeruser.save();
             res.status(201).render("login");
 
@@ -169,14 +165,7 @@ app.post('/login', async (req, res, next) => {
         console.log(email);
         console.log(password);
         const useremail = await Registerdb.findOne({ email: email })
-        const token = await useremail.generateAuthToken();
-
-        res.cookie("jwt",token, {
-            expires:new Date(Date.now() +(24*60*60*1000*2)),
-            httpOnly:true,
-            // secure:true
-        });
-        console.log("cookie",res.cookie )
+        
         if (useremail.password === password) {
 
             // res.send(response);
